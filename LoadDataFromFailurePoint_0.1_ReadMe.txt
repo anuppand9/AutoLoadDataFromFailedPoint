@@ -1,0 +1,19 @@
+This job will upload the input file (flat file) into target table, if job failed at some point because of any reason, it will start to reload the data from the record where the job got failed.
+
+Feature
+1. Job will detact the failure point record and save it for next run use.
+	1.1 If job failed in middle of data loading, it will store the last inserted record in logs.
+	1.2 If job loaded the all data successfully, it will reset the log with 1st record.
+	1.3 Further this log will use by job in next run accordingly.
+
+2. Job will compare the input file rows and target db rows and store the log with status (failed/OK).
+	2.1 If all input rows loaded successfully, job will store log with OK message.
+	2.2 If all input rows not loaded in table successfully, job will store log with failed message.
+
+3. Job will store error if any in log along with root cause detail.
+
+
+Prequisites
+1. Set context value as per requirement.
+2. Set DB connection value as per requirement.
+3. Set input file schema/Output Table schema as per requirement.
